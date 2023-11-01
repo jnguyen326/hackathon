@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kami | Design Evaluator</title>
+    <style>
+        body {
+            background: linear-gradient(to right, purple, blue, magenta);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div style="text-align: center; max-width: 600px;">
+        <h1 style="font-size: 2em; margin-bottom: 20px; color: white;">InsightiveUX <span style="font-size: 0.4em; vertical-align: top;color: white;"> a UI/UX AI Evaluator</span></h1>
+
+        <p style="background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px; box-shadow: 0px 0px 15px rgba(0,0,0,0.1);">
+            <strong>InsightiveUX</strong> is a platform where users can submit UX/UI design PDFs for AI evaluation and feedback. No need to spend time on manual evaluations, let our evaluator do it for you!
+        </p>
+
+        <form action="/upload" method="post" enctype="multipart/form-data" style="margin-top: 20px;">
+            <input type="file" name="file" accept=".pdf" style="display: none;" id="pdfInput">
+            <button type="button" onclick="document.getElementById('pdfInput').click();" style="background-color: #333; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">Upload PDF</button>
+        </form>
+    </div>
+
+    <footer style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 0.8em;">
+        <a href="#" style="color: #333; text-decoration: none;">Back</a>
+        <span style="margin: 0 10px;">|</span>
+        <a href="#" style="color: #333; text-decoration: none;">Next</a>
+    </footer>
+</body>
+
+</html>
