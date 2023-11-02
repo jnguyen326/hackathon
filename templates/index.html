@@ -1,13 +1,3 @@
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <div style="margin-top: 20px;">
-            {% for message in messages %}
-                <p style="background-color: rgba(255, 0, 0, 0.8); padding: 10px; border-radius: 5px;">{{ message }}</p>
-            {% endfor %}
-        </div>
-    {% endif %}
-{% endwith %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,41 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Radical X | Design Evaluator</title>
-    <style>
-        body {
-            background: linear-gradient(to right, #B58FE4, #C8BFFE, #A2F0FF);
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
+    <link rel="stylesheet" href="static/assets/styles.css">
 </head>
 
 <body>
-
-    <div style="text-align: center; max-width: 600px;">
-        <h1 style="font-size: 2em; margin-bottom: 20px;">InsightiveUX <span style="font-size: 0.4em; vertical-align: top;"> a UI/UX AI Evaluator</span></h1>
-
-        <p style="background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px; box-shadow: 0px 0px 15px rgba(0,0,0,0.1);">
+    <div class="main-container">
+        <h1>InsightiveUX <span> UI/UX AI Evaluator</span></h1>
+        <p>
             <strong>InsightiveUX</strong> is a platform where users can submit UX/UI design PDFs for AI evaluation and feedback. No need to spend time on manual evaluations, let our evaluator do it for you!
         </p>
 
-        <form action="/" method="post" enctype="multipart/form-data" style="margin-top: 20px;">
-            <input type="file" name="file" accept=".pdf" style="display: none;" id="pdfInput" onchange="this.form.submit()">
-            <input type="button" value="Choose and Submit PDF" onclick="document.getElementById('pdfInput').click();" style="background-color: #333; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">
-        </form>
-    </div>
+        <form action="/" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".pdf" id="pdfInput" onchange="this.form.submit()" style="display: none;">
+    <input type="button" value="Choose and Submit PDF" onclick="document.getElementById('pdfInput').click();">
+</form>
 
-    <footer style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 0.8em;">
-        <a href="#" style="color: #333; text-decoration: none;">Back</a>
-        <span style="margin: 0 10px;">|</span>
-        <a href="#" style="color: #333; text-decoration: none;">Next</a>
-    </footer>
+        <div class="content-wrapper">
+            <div class="pdf-preview">
+                {% if pdf_url %}
+                <iframe src="{{ pdf_url }}" width="100%" height="400"></iframe>
+                {% endif %}
+            </div>
+
+            <div class="chat-section">
+                <div class="chat-log" id="chatLog">
+                    {% if initial_feedback %}
+                    <p><strong>AI Evaluator:</strong> {{ initial_feedback }}</p>
+                    {% endif %}
+                </div>
+
+                <textarea id="userInput" placeholder="Ask a question..."></textarea>
+                <button onclick="submitQuestion()">Submit</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
