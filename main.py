@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, flash, jso
 from google.cloud import storage
 from dotenv import load_dotenv
 import configparser
-from io import BytesIO
 from vertexai.language_models import TextGenerationModel
 from langchain.document_loaders import PyPDFLoader
 import vertexai
@@ -75,22 +74,30 @@ def index():
         pdf_url = blob.public_url
 
         loader = PyPDFLoader(pdf_file_path)
+
+
         data = loader.load()
         os.remove(pdf_file_path)
 
         captions = []
         try:
             extracted_images = loader.get_extracted_images()  # Assuming this method is available in PyPDFLoader
+            print(f"Number of images extracted: {len(extracted_images)}")
             for image_path in extracted_images:
                 caption = get_image_caption(image_path)
+                print(f"Caption for {image_path}: {caption}")
                 captions.append(caption)
+                app.logger.info(f"Number of images extracted: {len(extracted_images)}")
+                app.logger.info(f"Caption for {image_path}: {caption}")
+
+
         except AttributeError:
             # If the get_extracted_images method doesn't exist, this block will catch the error.
             pass
 
 
         all_captions = ' '.join(captions)
-        prompt = f'Can you please provide recommendations that would improve the design of the PDF? These can be your thoughts regarding the flow of the document, the content, or anything else you think of. Can you also explain your rationale behind these changes. Thank you... {all_captions}'
+        prompt = f'Can you please provide recommendations that would improve the UI/UX design of the PDF? These can be your thoughts regarding the flow of the document, visuals, colors, the content, or anything else you think of. Your objective is to analyze its elements and provide comprehensive, insightful, and actionable feedback. You will be fed the images and text information. You should assess both the usability and aesthetics of the design, offering suggestions for improvement while also highlighting strengths. Your feedback should aid designers, businesses, and professionals in refining and enhancing their creations. Remember, quality and clarity in your critique are essential. Can you also explain your rationale behind these changes. Thank you... {all_captions}'
         parameters = {
             "candidate_count": 1,
             "max_output_tokens": 1024,
