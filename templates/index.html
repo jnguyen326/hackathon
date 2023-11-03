@@ -23,12 +23,6 @@
 </form>
 
         <div class="content-wrapper">
-            <div class="pdf-preview">
-                {% if pdf_url %}
-                <iframe src="{{ pdf_url }}" width="100%" height="400"></iframe>
-                {% endif %}
-            </div>
-
             <div class="chat-section">
                 <div class="chat-log" id="chatLog">
                     {% if initial_feedback %}
@@ -38,6 +32,11 @@
 
                 <textarea id="userInput" placeholder="Ask a question..."></textarea>
                 <button onclick="submitQuestion()">Submit</button>
+            </div>
+            <div class="pdf-preview">
+                {% if pdf_url %}
+                <iframe src="{{ pdf_url }}" width="100%" height="400"></iframe>
+                {% endif %}
             </div>
         </div>
     </div>
