@@ -59,29 +59,27 @@ form input[type="button"] {
 .pdf-preview, .chat-section {
     width: 50%;
 }
-
-.pdf-preview iframe {
-    width: 100%;
-    height: 600px;
-    border: 1px solid #ccc;
+.chat-interface {
+    display: flex;
+    flex-direction: column;
+    height: 600px; /* or whatever you choose as the height of chat-log */
 }
-
 .chat-log {
-    border: 2px solid #ccc;
-    height: 600px;
+    flex: 1; /* this will make chat-log take up all the space it can */
     overflow-y: auto;
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 20px;
 }
 
+
 textarea {
     width: 100%;
-    padding: 15px;
+    padding: 12px;
     border-radius: 8px;
     border: 2px solid #ccc;
-    margin-bottom: 10px;
-    resize: none;
+    margin-bottom: 20px;
+    flex: 0 0 auto; /* this makes sure textarea doesn't shrink or grow */
 }
 
 button {
@@ -93,4 +91,14 @@ button {
     color: #fff;
     cursor: pointer;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    flex: 0 0 auto; /* this makes sure button doesn't shrink or grow */
+}
+.pdf-preview {
+    display: flex;
+    align-items: stretch; /* this ensures iframe takes up all the vertical space */
+}
+
+.pdf-preview iframe {
+    border: 1px solid #ccc;
+    flex-grow: 1; /* this allows the iframe to grow and take up available space */
 }
