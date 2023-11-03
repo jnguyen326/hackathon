@@ -4,20 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radical X | Design Evaluator</title>
+    <title>RadicalX | Design Evaluator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/assets/styles.css">
 </head>
 
 <body>
     <div class="main-container">
+        <h1><img src="{{ url_for('static', filename='img/logo.png') }}" alt="RadicalX"/></h1>
         <h1>InsightiveUX <span> UI/UX AI Evaluator</span></h1>
         <p>
-            <strong>InsightiveUX</strong> is a platform where users can submit UX/UI design PDFs for AI evaluation and feedback. No need to spend time on manual evaluations, let our evaluator do it for you!
+            <strong>ReX's InsightiveUX</strong> is a platform where users can submit UX/UI design PDFs for AI evaluation and feedback. No need to spend time on manual evaluations, let our buddy ReX help you out!
         </p>
 
         <form action="/" method="post" enctype="multipart/form-data">
     <input type="file" name="file" accept=".pdf" id="pdfInput" onchange="this.form.submit()" style="display: none;">
-    <input type="button" value="Choose and Submit PDF" onclick="document.getElementById('pdfInput').click();">
+    <input type="button" value="Upload PDF" onclick="document.getElementById('pdfInput').click();">
 </form>
 
         <div class="content-wrapper">
@@ -30,7 +32,7 @@
             <div class="chat-section">
                 <div class="chat-log" id="chatLog">
                     {% if initial_feedback %}
-                    <p><strong>AI Evaluator:</strong> {{ initial_feedback }}</p>
+                    <p><strong>ReX:</strong> {{ initial_feedback }}</p>
                     {% endif %}
                 </div>
 

@@ -6,6 +6,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+const sidebar = document.querySelector('.sidebar');
+const navigatorBtn = document.querySelector('.navigator-button'); // You may need to adjust the selector if it's different
+
+navigatorBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+});
+
 function submitQuestion() {
     const userInput = document.getElementById('userInput').value;
 
